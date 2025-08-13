@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization & User Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 16px;
+            width: 600px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+        table, .user-results {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        th, td, .user-details {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .user-details h3, .user-details p, .user-details h4 {
+            margin: 0;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Organization & User Search</h1>
+
+    <input type="text" id="searchInput" placeholder="Search by ERP ID, Support Site ID, or Name">
+    <input type="submit" id="searchBtn" value="Search Organizations">
+    
+    <!-- User search input -->
+    <input type="text" id="userSearchInput" placeholder="Search user by email">
+    <input type="submit" id="userSearchBtn" value="Search Users">
+
+    <div id="errorContainer" style="display:none; color:red; margin-top: 10px;"></div>
+
+    <!-- Organization search results -->
+    <table id="resultsTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>Display Name</th>
+                <th>Org ID</th>
+                <th>Parent ID</th>
+                <th>Server</th>
+                <th>ERP Account ID</th>
+                <th>Support Site ID</th>
+            </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+    </table>
+
+    <!-- User search results container -->
+    <div id="userResultsContainer" style="display:none;" class="user-results"></div>
+
+    <script type="module" src="popup.js"></script>
+</body>
+</html>

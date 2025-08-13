@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "AppNeta Organization Lookup",
+  "version": "1.6",
+  "description": "Search for organizations using the Provisioning API",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png"
+  },
+  "action": {
+    "default_icon": "icon48.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "cookies",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.appneta.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "options_page": "options.html",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "sean-g.hall@broadcom.com"
+    }
+  }
+}
