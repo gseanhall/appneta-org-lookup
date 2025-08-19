@@ -147,6 +147,7 @@ chrome.storage.sync.get(['provisionUrl', 'signonUrl'], (items) => {
       const row = document.createElement('tr');
 
       const displayNameCell = document.createElement('td');
+      displayNameCell.classList.add('truncate');
       const displayNameLink = document.createElement('a');
       displayNameLink.href = `https://${org.server}/pvc/?st=${org.orgId}`;
       displayNameLink.textContent = org.displayName;

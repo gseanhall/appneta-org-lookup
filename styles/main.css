@@ -141,3 +141,10 @@ th {
 .options-container button:hover {
     background-color: var(--primary-color-hover);
 }
+
+.truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
