@@ -4,11 +4,11 @@
   "version": "1.6",
   "description": "Search for organizations using the Provisioning API",
   "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png"
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png"
   },
   "action": {
-    "default_icon": "icon48.png",
+    "default_icon": "assets/icon48.png",
     "default_popup": "popup.html"
   },
   "permissions": [
