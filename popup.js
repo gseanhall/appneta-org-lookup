@@ -1,4 +1,4 @@
-import { getCache, setCache } from './utils/cache.js';
+import { getCache, setCache, searchCache } from './utils/cache.js';
 import { fetchOrganizations, fetchUsers } from './utils/api.js';
 import { checkAuthentication, triggerLogin } from './utils/auth.js';
 
@@ -6,14 +6,14 @@ chrome.storage.sync.get(['provisionUrl', 'signonUrl'], (items) => {
   const provisionUrl = items.provisionUrl || 'https://provision.pm.appneta.com';
   const signonUrl = items.signonUrl || 'https://signon.pm.appneta.com';
 
-  document.getElementById('searchBtn').addEventListener('click', () => performSearch(provisionUrl));
-  document.getElementById('userSearchBtn').addEventListener('click', () => performUserSearch(provisionUrl));
+  document.getElementById('searchBtn').addEventListener('click', () => performSearch(provisionUrl, signonUrl));
+  document.getElementById('userSearchBtn').addEventListener('click', () => performUserSearch(provisionUrl, signonUrl));
   document.getElementById('loginLink').addEventListener('click', (e) => {
     e.preventDefault();
     triggerLogin(signonUrl, provisionUrl);
   });
 
-  async function performSearch() {
+  async function performSearch(provisionUrl, signonUrl) {
     const searchInput = document.getElementById('searchInput').value.trim();
     if (!searchInput) {
       alert('Please enter a search value.');
@@ -65,9 +65,9 @@ chrome.storage.sync.get(['provisionUrl', 'signonUrl'], (items) => {
           displayError('An error occurred while performing the search.');
         });
     } else {
-      const cachedOrgs = await getCache(`org_${searchInput}`);
-      if (cachedOrgs && cachedOrgs.length > 0) {
-        displayResults(cachedOrgs);
+      const { orgs } = await searchCache(searchInput);
+      if (orgs.length > 0) {
+        displayResults(orgs);
         document.getElementById('cacheMessageContainer').style.display = 'block';
       } else {
         triggerLogin(signonUrl, provisionUrl);
@@ -75,7 +75,7 @@ chrome.storage.sync.get(['provisionUrl', 'signonUrl'], (items) => {
     }
   }
 
-  async function performUserSearch() {
+  async function performUserSearch(provisionUrl, signonUrl) {
     const userSearchInput = document.getElementById('userSearchInput').value.trim();
     if (!userSearchInput) {
       alert('Please enter a user search value.');
@@ -95,9 +95,9 @@ chrome.storage.sync.get(['provisionUrl', 'signonUrl'], (items) => {
           displayError('An error occurred while performing the user search.');
         });
     } else {
-      const cachedUsers = await getCache(`user_${userSearchInput}`);
-      if (cachedUsers && cachedUsers.length > 0) {
-        displayUserResults(cachedUsers);
+      const { users } = await searchCache(userSearchInput);
+      if (users.length > 0) {
+        displayUserResults(users);
         document.getElementById('cacheMessageContainer').style.display = 'block';
       } else {
         triggerLogin(signonUrl, provisionUrl);
