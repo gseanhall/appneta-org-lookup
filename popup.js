@@ -119,11 +119,13 @@ chrome.storage.sync.get(['provisionUrl', 'signonUrl'], (items) => {
         <h4>Organizations:</h4>
       `;
       const orgList = document.createElement('ul');
-      user.memberships.forEach(membership => {
-        const orgItem = document.createElement('li');
-        orgItem.textContent = `${membership.organization.displayName} (ID: ${membership.organization.id})`;
-        orgList.appendChild(orgItem);
-      });
+      if (user.memberships) {
+        user.memberships.forEach(membership => {
+          const orgItem = document.createElement('li');
+          orgItem.textContent = `${membership.organization.displayName} (ID: ${membership.organization.id})`;
+          orgList.appendChild(orgItem);
+        });
+      }
       userDetails.appendChild(orgList);
       userResultsContainer.appendChild(userDetails);
     });
